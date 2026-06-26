@@ -28,11 +28,11 @@ const Sidebar = () => {
     setMobileOpen(false);
   }, [pathname]);
 
-  const role = "" || "EMPLOYEE";
+  const role = "ADMIN" || "EMPLOYEE";
   const navItems = [
     { name: "Dashboard", href: "/dashboard", icon: LayoutGrid },
     role === "ADMIN"
-      ? { name: "Employees", href: "/employees", icon: User }
+      ? { name: "Employees", href: "/employee", icon: User }
       : { name: "Attendance", href: "/attendance", icon: Calendar },
     { name: "Leave", href: "/leave", icon: FileText },
     { name: "Payslips", href: "/payslips", icon: DollarSign },
