@@ -27,8 +27,8 @@ const LeaveHistory = ({ leaves, isAdmin, onUpdate }) => {
             {leaves.length === 0 ? (
               <tr>
                 <td
-                //   colSpan={isAdmin ? 6 : 4}
-                  colSpan={6}
+                  colSpan={isAdmin ? 6 : 4}
+                  // colSpan={6}
                   className="text-center py-12 text-slate-400"
                 >
                   No leave applications found
