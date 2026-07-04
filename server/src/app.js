@@ -5,6 +5,8 @@ import authRouter from "./routes/auth.route.js";
 import employeeRouter from "./routes/employee.route.js";
 import profileRouter from "./routes/profile.route.js";
 import attendanceRouter from "./routes/attendance.route.js";
+import LeaveApplicationRouter from "./routes/leave.application.route.js";
+import payslipRouter from "./routes/payslip.route.js";
 
 const app = express();
 
@@ -19,5 +21,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/employees', employeeRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/attendance', attendanceRouter)
+app.use('/api/leave', LeaveApplicationRouter)
+app.use('/api/payslip', payslipRouter)
 
 export default app
