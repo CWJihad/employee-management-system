@@ -2,11 +2,6 @@ import employeeModel from "../models/employee.model.js"
 import LeaveApplicationModel from "../models/leave.application.model.js"
 
 
-
-
-
-
-
 const createLeave = async (req, res) => {
     
     try {
@@ -191,6 +186,12 @@ const updateLeaveStatus = async (req, res) => {
         
     }
     
+}
+
+export {
+    createLeave,
+    getLeaves,
+    updateLeaveStatus
 }
 
 
