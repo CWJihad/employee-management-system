@@ -8,6 +8,8 @@ import attendanceRouter from "./routes/attendance.route.js";
 import LeaveApplicationRouter from "./routes/leave.application.route.js";
 import payslipRouter from "./routes/payslip.route.js";
 import dashboardRouter from "./routes/dashboard.route.js";
+import { serve } from "inngest/express";
+import { inngest, functions} from "./inngest/index.js"
 
 const app = express();
 
@@ -25,5 +27,7 @@ app.use('/api/attendance', attendanceRouter)
 app.use('/api/leave', LeaveApplicationRouter)
 app.use('/api/payslip', payslipRouter)
 app.use('/api/dashboard', dashboardRouter)
+// Set up the "/api/inngest" (recommended) routes with the serve handler
+app.use("/api/inngest", serve({ client: inngest, functions }));
 
 export default app
