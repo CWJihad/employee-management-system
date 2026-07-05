@@ -1,6 +1,7 @@
 // Attendence Check-Out Remainder email template
 
-const template1 = `
+const template1 = (employee, attendance) => (
+    `
                 <div style="max-width: 600px;">
                     <h2>Hi ${employee.firstName}, 👋</h2>
                     <p style="font-size: 16px;">You have a check-in in ${employee.department} today:</p>
@@ -12,9 +13,10 @@ const template1 = `
                     <p style="font-size: 16px;">EMS</p>
                 </div>
             `
+        )
 
 // Leave Application Reminder email template
-const template2 = `
+const template2 = (employee, leaveApplication) => ( `
             <div style="max-width: 600px;">
                 <h2>Hi Admin, 👋</h2>
                 <p style="font-size: 16px;">You have a leave application in ${employee.department} today:</p>
@@ -24,10 +26,10 @@ const template2 = `
                 <p style="font-size: 16px;">Best Regards,</p>
                 <p style="font-size: 16px;">EMS</p>
             </div>
-        `
+        `)
 
 // Attendance Reminder
-const template3 = `
+const template3 = (emp) => (`
                             <div style="max-width: 600px; font-family: Arial, sans-serif;">
                                 <h2>Hi ${emp.firstName}, 👋</h2>
                                 <p style="font-size: 16px;">We noticed you haven't marked your attendance yet today.</p>
@@ -39,4 +41,11 @@ const template3 = `
                                 <p style="font-size: 16px;">Best Regards,</p>
                                 <p style="font-size: 16px;"><strong>QuickEMS</strong></p>
                             </div>
-                        `
+                        `)
+
+
+export {
+    template1,
+    template2,
+    template3
+}
