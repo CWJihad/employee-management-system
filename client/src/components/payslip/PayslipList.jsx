@@ -11,7 +11,7 @@ const PayslipList = ({payslips,isAdmin}) => {
         <table className="table-modern">
           <thead>
             <tr>
-              {isAdmin && <th>EMployee</th>}
+              {isAdmin && <th>Employee</th>}
               <th>Period</th>
               <th>Basic Salary</th>
               <th>Net Salary</th>
@@ -19,6 +19,7 @@ const PayslipList = ({payslips,isAdmin}) => {
             </tr>
           </thead>
           <tbody>
+            {/* {console.log(payslips)} */}
             {payslips.length === 0 ? (
               <tr>
                 <td
@@ -35,7 +36,7 @@ const PayslipList = ({payslips,isAdmin}) => {
                   <tr key={payslip._id || payslip.id}>
                     {isAdmin && (
                       <td className="text-slate-900">
-                        {payslip.employee?.firstName}
+                        {payslip.employee?.firstName} {}
                         {payslip.employee?.lastName}
                       </td>
                     )}

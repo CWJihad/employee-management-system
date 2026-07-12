@@ -1,5 +1,7 @@
 import { Loader2, Plus, X } from "lucide-react";
 import React, { useState } from "react";
+import api from "../../api/axios";
+import toast from "react-hot-toast";
 
 const PayslipForm = ({ employees, onSuccess }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,6 +19,17 @@ const PayslipForm = ({ employees, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+    try {
+      await api.post("/payslips", data);
+      setIsOpen(false);
+      onSuccess();
+    } catch (err) {
+      toast.error(err?.response?.data?.error || err.message);
+    }
+    setLoading(false)
   };
 
   return (
@@ -87,7 +100,7 @@ const PayslipForm = ({ employees, onSuccess }) => {
               name="basicSalary"
               required
               placeholder="$5000"
-              min='1000'
+              min="1000"
             />
           </div>
 
@@ -111,15 +124,22 @@ const PayslipForm = ({ employees, onSuccess }) => {
           {/* buttons */}
 
           <div className="flex justify-end gap-3 pt-2">
-            <button onClick={() => setIsOpen(false)} type="button" className="btn-secondary cursor-pointer">
-                Cancel
+            <button
+              onClick={() => setIsOpen(false)}
+              type="button"
+              className="btn-secondary cursor-pointer"
+            >
+              Cancel
             </button>
-            <button disabled={loading} className="btn-primary cursor-pointer flex items-center" type="submit">
-              {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin"/>}
-                Generate
+            <button
+              disabled={loading}
+              className="btn-primary cursor-pointer flex items-center"
+              type="submit"
+            >
+              {loading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+              Generate
             </button>
           </div>
-          
         </form>
       </div>
     </div>

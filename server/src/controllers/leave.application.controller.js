@@ -106,7 +106,7 @@ const getLeaves = async (req, res) => {
             
             const status = req.query.status
             const where = status ? {status} : {}
-            const leaves = (await LeaveApplicationModel.find(where).populate("employeeId")).toSorted({createdAt: -1})
+            const leaves = await LeaveApplicationModel.find(where).populate("employeeId").sort({createdAt: -1})
             const data = leaves.map((l) => {
                 const obj = l.toObject()
 
@@ -118,7 +118,7 @@ const getLeaves = async (req, res) => {
                 }
             })
 
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
                 message: "Admin Successfully fetched employees leaves data",
                 data
@@ -139,11 +139,11 @@ const getLeaves = async (req, res) => {
                 
             }
 
-            const leaves = await LeaveApplicationModel.findOne({
+            const leaves = await LeaveApplicationModel.find({
                 employeeId: employee._id
             }).sort({createdAt: -1})
 
-            return res.status(201).json({
+            return res.status(200).json({
                 success: true,
                 message: "Employee successfully got his leaves data",
                 data: leaves,
@@ -154,9 +154,11 @@ const getLeaves = async (req, res) => {
         }
         
     } catch (error) {
+        console.error('Get leaves Error:', error);
         
         return res.status(500).json({
-            error: "Leave application failed! "
+            success: false,
+            error: error.message
         })
         
     }

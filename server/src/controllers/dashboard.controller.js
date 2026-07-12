@@ -7,7 +7,7 @@ import payslipModel from "../models/payslip.model.js";
 export const getDashboard = async (req, res) => {
   try {
     const session = req.session;
-    if ((session.role = "ADMIN")) {
+    if ((session.role === "ADMIN")) {
       const [totalEmployees, todayAttendance, pendingLeaves] =
         await Promise.all([
           employeeModel.countDocuments({ isDeleted: { $ne: true } }),
@@ -20,7 +20,7 @@ export const getDashboard = async (req, res) => {
           LeaveApplicationModel.countDocuments({ status: "PENDING" }),
         ]);
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
         message: "Admin dashboard fetched successfully",
         role: "ADMIN",
@@ -50,7 +50,7 @@ export const getDashboard = async (req, res) => {
             employeeId: employee._id,
             date: {
               $gte: new Date(today.getFullYear(), today.getMonth(), 1),
-              $gte: new Date(today.getFullYear(), today.getMonth() + 1, 1),
+              $lt: new Date(today.getFullYear(), today.getMonth() + 1, 1),
             },
           }),
 
@@ -65,7 +65,7 @@ export const getDashboard = async (req, res) => {
             .lean(),
         ]);
 
-      return res.status(201).json({
+      return res.status(200).json({
         success: true,
         message: "Employee dashboard fetched successfully",
         role: "EMPLOYEE",
