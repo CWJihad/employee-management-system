@@ -5,7 +5,7 @@ import { createLeave, getLeaves, updateLeaveStatus } from '../controllers/leave.
 const LeaveApplicationRouter = Router()
 
 LeaveApplicationRouter.post('/', authMiddleware, createLeave)
-LeaveApplicationRouter.post('/', authMiddleware, getLeaves)
-LeaveApplicationRouter.post('/:id', authMiddleware, adminMiddleware, updateLeaveStatus)
+LeaveApplicationRouter.get('/', authMiddleware, getLeaves)
+LeaveApplicationRouter.put('/:id', authMiddleware, adminMiddleware, updateLeaveStatus)
 
 export default LeaveApplicationRouter

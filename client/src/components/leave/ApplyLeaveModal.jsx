@@ -1,5 +1,7 @@
 import { Calendar, FileText, Loader2, Send, X } from "lucide-react";
 import React, { useState } from "react";
+import api from "../../api/axios";
+import toast from "react-hot-toast";
 
 const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
@@ -11,7 +13,17 @@ const ApplyLeaveModal = ({ open, onClose, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Submit button working');
+    setLoading(true)
+    const formData = new FormData(e.currentTarget)
+    const data = Object.fromEntries(formData.entries())
+
+    try {
+      await api.post('/leave', data)
+      onSuccess()
+      onClose()
+    } catch (err) {
+      toast.error(err.response?.data?.error || err.message)
+    }
     
   };
 

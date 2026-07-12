@@ -25,7 +25,7 @@ app.use('/api/employees', employeeRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/attendance', attendanceRouter)
 app.use('/api/leave', LeaveApplicationRouter)
-app.use('/api/payslip', payslipRouter)
+app.use('/api/payslips', payslipRouter)
 app.use('/api/dashboard', dashboardRouter)
 // Set up the "/api/inngest" (recommended) routes with the serve handler
 app.use("/api/inngest", serve({ client: inngest, functions }));

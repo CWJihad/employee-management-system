@@ -6,16 +6,10 @@ const getEmployees = async (req, res) => {
   try {
     const { department } = req.query;
     const where = {};
-    if (!department) {
-      return res.status(404).json({
-        success: false,
-        message: "Department not found!!",
-      });
-    }
 
-    where.department = department;
-    const employees = (await employeeModel.find(where))
-      .toSorted({ createdAt: -1 })
+    if(department) where.department = department;
+    const employees = await employeeModel.find(where)
+      .sort({ createdAt: -1 })
       .populate("userId", "email role")
       .lean();
 
@@ -34,7 +28,7 @@ const getEmployees = async (req, res) => {
         : null,
     }));
 
-    return res.status(202).json({ success: true, result });
+    return res.status(202).json(result);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch employees" });
   }

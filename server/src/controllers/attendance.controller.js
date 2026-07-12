@@ -26,7 +26,7 @@ const clockInOUt = async (req, res) => {
 
     const existing = await attendanceModel.findOne({
       employeeId: employee._id,
-      date: tody,
+      date: today,
     });
 
     const now = new Date();

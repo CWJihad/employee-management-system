@@ -5,6 +5,12 @@
     font-family: "Outfit", "Inter";
 }
 
+/* Hide Microsoft Edge password reveal button */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
 @layer utilities {
     /* Card styles */
     .card {

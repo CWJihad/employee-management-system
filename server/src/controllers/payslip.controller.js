@@ -65,7 +65,7 @@ const getPayslips = async (req, res) => {
                     ...obj,
                     id: obj._id.toString(),
                     employee: obj.employeeId,
-                    employee: obj.employeeId?._id?.toString()
+                    employeeId: obj.employeeId?._id?.toString()
                 }
                 
             })
@@ -137,7 +137,8 @@ const getPayslipById = async (req, res) => {
         return res.status(201).json({
             success: true,
             message: "Payslip fetched successfully with id",
-        }, result)
+            data: result
+        })
         
     } catch (error) {
 
